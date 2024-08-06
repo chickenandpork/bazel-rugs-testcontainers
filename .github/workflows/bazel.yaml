@@ -1,0 +1,63 @@
+name: Bazel build
+
+env:
+  # Building on mac? Don't ever update homebrew: a huge cycles-consumer even if you ARE using it
+  HOMEBREW_NO_AUTO_UPDATE: 1
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+  push:
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      -
+        name: Date-Based Cache key
+        # get a key showing the current week (ISO: yyyyWww)
+        id: week
+        run: echo "::set-output name=iso::$(date +'bazel-%YW%U')"
+      -
+        name: Expand Paths
+        # paste that info into keys that self-document a bit better
+        id: env
+        env:
+          CACHE_BASE: "/tmp/cache"
+        run: |
+          echo "::set-output name=cache-base::${{ env.CACHE_BASE }}"
+          echo "::set-output name=cache-key::${{ steps.week.outputs.iso }}"
+          echo "::set-output name=cache-path::${{ env.CACHE_BASE }}/${{ steps.week.outputs.iso }}"
+      -
+        name: Mount bazel cache  # Optional
+        # The effect of this allows the bazel actions to build / test with an output_dir equal to
+        # the key subdir in the path, so the week-based cache path gets cached
+        uses: actions/cache@v3
+        with:
+          # Mount the cache at the expanded PATH
+          path: ${{ steps.env.outputs.cache-base }}
+          # key expires each week, allowing old cache info to age out
+          key: ${{ steps.env.outputs.cache-key }}
+      -
+        uses: actions/checkout@v4
+        # action runners have bazelisk: - uses: bazelbuild/setup-bazelisk@v2
+        # https://github.com/bazelbuild/bazel/issues/11062
+      -
+        env:
+          # typically used for bazel internal testing: changes outputRoot, sets idletimeout to ~15s
+          TEST_TMPDIR: ${{ steps.env.outputs.cache-path }}
+        run: bazel build //...
+      -
+        env:
+          # typically used for bazel internal testing: changes outputRoot, sets idletimeout to ~15s
+          TEST_TMPDIR: ${{ steps.env.outputs.cache-path }}
+        run: bazel test //... --test_output=errors --test_summary=detailed
+      -
+        run: bazel shutdown
