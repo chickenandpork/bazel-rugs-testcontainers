@@ -10,13 +10,17 @@
     {
       "enabled": true,
       "matchManagers": [
-        "bazel",
+        "bazel-module",
+        "github-actions",
         "gomod"
       ]
     },
     {
-      "matchUpdateTypes": ["patch", "minor"],
-      "automerge": true
+      "automerge": true,
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ]
     }
   ]
 }
