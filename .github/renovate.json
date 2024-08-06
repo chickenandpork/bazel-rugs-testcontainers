@@ -11,7 +11,7 @@
       "enabled": true,
       "matchManagers": [
         "bazel",
-        "go"
+        "gomod"
       ]
     },
     {
