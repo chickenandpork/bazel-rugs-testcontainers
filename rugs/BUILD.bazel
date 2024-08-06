@@ -1,0 +1,19 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_test(
+    name = "rugs_test",
+    srcs = ["rugs_test.go"],
+    embed = [":rugs"],
+)
+
+go_library(
+    name = "rugs",
+    srcs = ["rugs.go"],
+    importpath = "github.com/chickenandpork/bazel-rugs-testcontainers/rugs",
+    visibility = ["//visibility:public"],
+    deps = [
+        # "@com_github_docker_docker//api/types/container",
+        "@com_github_testcontainers_testcontainers_go//:testcontainers-go",
+        "@com_github_testcontainers_testcontainers_go//wait",
+    ],
+)

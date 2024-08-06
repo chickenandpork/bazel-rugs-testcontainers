@@ -1,0 +1,4 @@
+test --test_verbose_timeout_warnings
+#  --toolchain_resolution_debug (a comma-separated list of regex expressions with prefix '-' specifying excluded paths; default: "-.*")
+test --verbose_explanations --verbose_failures --verbose_test_summary --sandbox_debug --test_output=errors --test_summary=detailed
+
