@@ -39,7 +39,7 @@ jobs:
         name: Mount bazel cache  # Optional
         # The effect of this allows the bazel actions to build / test with an output_dir equal to
         # the key subdir in the path, so the week-based cache path gets cached
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           # Mount the cache at the expanded PATH
           path: ${{ steps.env.outputs.cache-base }}
