@@ -22,5 +22,6 @@
         "minor"
       ]
     }
-  ]
+  ],
+  "stabilityDays": 3
 }
