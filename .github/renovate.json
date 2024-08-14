@@ -12,7 +12,8 @@
       "matchManagers": [
         "bazel-module",
         "github-actions",
-        "gomod"
+        "gomod",
+        "regex"
       ]
     },
     {
@@ -21,6 +22,15 @@
         "patch",
         "minor"
       ]
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["MODULE.bazel$"],
+      "matchStrings": [
+        "\"renovate_datasource\": \"(?<datasource>.*?)\",\\s    \"renovate_depname\": \"(?<depName>.*?)\",\\s(    \"renovate_versioning\": \"(?<versioning>.*?)\",\\s)?(    \"sha256\": \"(?<currentDigest>.*?)\",\\s)?    \"version\": \"(?<currentValue>.*?)\"",
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
     }
   ],
   "stabilityDays": 3
