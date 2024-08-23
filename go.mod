@@ -2,7 +2,7 @@ module github.com/chickenandpork/bazel-rugs-testcontainers
 
 go 1.22.4
 
-require github.com/testcontainers/testcontainers-go v0.32.0
+require github.com/testcontainers/testcontainers-go v0.33.0
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
