@@ -4,7 +4,7 @@ go 1.23
 
 toolchain go1.23.4
 
-require github.com/testcontainers/testcontainers-go v0.34.0
+require github.com/testcontainers/testcontainers-go v0.35.0
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
