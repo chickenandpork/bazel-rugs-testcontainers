@@ -7,7 +7,7 @@ go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_version = {
     "renovate_datasource": "github-tags",
     "renovate_depname": "golang/go",
-    "version": "go1.22.4"
+    "version": "go1.23.0"
 }
 
 # Download an SDK for the host OS & architecture as well as common remote execution platforms.
