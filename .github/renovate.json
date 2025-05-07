@@ -4,8 +4,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "MODULE.bazel$"
+      "managerFilePatterns": [
+        "/MODULE.bazel$/"
       ],
       "matchStrings": [
         "\"renovate_datasource\": \"(?<datasource>.*?)\",\\s    \"renovate_depname\": \"(?<depName>.*?)\",\\s(    \"renovate_versioning\": \"(?<versioning>.*?)\",\\s)?(    \"sha256\": \"(?<currentDigest>.*?)\",\\s)?    \"version\": \"(?<currentValue>.*?)\""
