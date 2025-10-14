@@ -2,7 +2,7 @@ module github.com/chickenandpork/bazel-rugs-testcontainers
 
 go 1.24.0
 
-toolchain go1.25.2
+toolchain go1.25.3
 
 require github.com/testcontainers/testcontainers-go v0.39.0
 
