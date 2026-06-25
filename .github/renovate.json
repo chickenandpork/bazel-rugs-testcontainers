@@ -14,7 +14,8 @@
     }
   ],
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigestsToSemver"
   ],
   "labels": [
     "dependencies"
